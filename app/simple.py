@@ -11,7 +11,7 @@ async def root():
 
 
 @app.get("/ping")
-async def ping():
+async def ping():n
 	return {"pong": True}
 
 
