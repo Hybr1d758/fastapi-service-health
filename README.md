@@ -5,7 +5,7 @@ A minimal FastAPI service to quickly test networking, routing, and headers in lo
 ### Why this is useful
 - Demonstrates spinning up a clean HTTP service quickly.
 - Simple, reliable endpoints SRE/DevOps can probe.
-- Clear structure, tests, Docker, and CI for hiring signal.
+- Clear structure, tests, Docker, and CI.
 
 ## Features
 - Minimal endpoints:
