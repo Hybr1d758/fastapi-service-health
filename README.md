@@ -57,3 +57,7 @@ Expected:
   - 200: `{"headers": {...}}`
 
 ## Project structure
+.
+├── app/
+│ └── simple.py # minimal FastAPI app
+└── requirements.txt # fastapi + uvicorn
