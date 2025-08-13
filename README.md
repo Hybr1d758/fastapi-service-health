@@ -59,5 +59,6 @@ Expected:
 ## Project structure
 .
 ├── app/
-│ └── simple.py # minimal FastAPI app
+│ 
+└── simple.py # minimal FastAPI app
 └── requirements.txt # fastapi + uvicorn
