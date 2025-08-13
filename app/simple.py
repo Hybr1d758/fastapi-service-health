@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Request
+from datetime import datetime, timezone
 
 
 app = FastAPI(title="network-test")
@@ -10,7 +11,7 @@ async def root():
 
 
 @app.get("/ping")
-async def ping():
+async def ping():n
 	return {"pong": True}
 
 
@@ -22,5 +23,11 @@ async def ip(request: Request):
 @app.get("/headers")
 async def headers(request: Request):
 	return {"headers": dict(request.headers)}
+
+
+@app.get("/time")
+async def time_utc():
+	now = datetime.now(timezone.utc)
+	return {"iso_utc": now.isoformat(), "epoch_ms": int(now.timestamp() * 1000)}
 
 

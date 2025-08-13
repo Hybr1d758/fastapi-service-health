@@ -1,14 +1,11 @@
-
 ## FastAPI Network Test Service
 
 A minimal FastAPI service to quickly test networking, routing, and headers in local or cloud environments.
 
-### Why this is useful 
-- Load balancer/ingress health checks: Point probes to /ping to validate target health and routing.
-- Network reachability tests: Quickly confirm a service is reachable on host/port in different environments.
-- Proxy/header debugging: Use /headers to see what headers survive through gateways (X-Forwarded-For, auth).
-- Client IP verification: /ip shows what the app sees (useful with NAT, reverse proxies, WAFs).
-- CI/CD smoke tests: Post-deploy curl /ping to fail fast if the service isn’t reachable.
+### Why this is useful
+- Demonstrates spinning up a clean HTTP service quickly.
+- Simple, reliable endpoints SRE/DevOps can probe.
+- Clear structure, tests, Docker, and CI for hiring signal.
 
 ## Features
 - Minimal endpoints:
@@ -53,7 +50,7 @@ Expected:
 - `/headers` → `{"headers": {...}}`
 - `/time` → `{"iso_utc": "...", "epoch_ms": 1234567890}`
 
-## Makefile 
+## Makefile (dev UX)
 ```bash
 make run        # start the app (uvicorn)
 make test       # run pytest
@@ -87,15 +84,42 @@ docker run --rm -p 8000:8000 fastapi-network-test
 
 ## Project structure
 ```
- .
- ├── app/
- │ └── simple.py
- ├── tests/
- │ └── test_simple.py
- ├── .github/
- │ └── workflows/
- │ └── ci.yml
- ├── Dockerfile
- ├── Makefile
- ├── requirements.txt
- └── README.md
+.
+├── app/
+│   └── simple.py
+├── tests/
+│   └── test_simple.py
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+├── Dockerfile
+├── Makefile
+├── requirements.txt
+└── README.md
+```
+
+### Kubernetes (optional, using /ping for probes)
+```yaml
+livenessProbe:
+  httpGet:
+    path: /ping
+    port: 8000
+  initialDelaySeconds: 5
+  periodSeconds: 10
+
+readinessProbe:
+  httpGet:
+    path: /ping
+    port: 8000
+  initialDelaySeconds: 3
+  periodSeconds: 5
+```
+
+## Roadmap (optional)
+- Health endpoints (`/live`, `/ready`) for real dependency checks
+- Structured JSON logging + correlation IDs
+- Metrics (`/metrics`) and tracing (OTel)
+- More tests and linting (ruff/black/mypy)
+
+## License
+MIT
