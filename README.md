@@ -3,10 +3,12 @@
 
 A minimal FastAPI service to quickly test networking, routing, and headers in local or cloud environments.
 
-### Why this is useful (hiring signal)
-- Demonstrates you can spin up a clean HTTP service quickly.
-- Provides simple, reliable endpoints SREs/DevOps can probe.
-- Clear structure, clear instructions, easy to deploy and test.
+### Why this is useful 
+- Load balancer/ingress health checks: Point probes to /ping to validate target health and routing.
+- Network reachability tests: Quickly confirm a service is reachable on host/port in different environments.
+- Proxy/header debugging: Use /headers to see what headers survive through gateways (X-Forwarded-For, auth).
+- Client IP verification: /ip shows what the app sees (useful with NAT, reverse proxies, WAFs).
+- CI/CD smoke tests: Post-deploy curl /ping to fail fast if the service isn’t reachable.
 
 ## Features
 - Minimal endpoints:
